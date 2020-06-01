@@ -1,0 +1,34 @@
+{% include "require/head.html" %}
+
+<!-- Product -->
+<div class="container">
+<div class="row">
+    <div class="col-md-6 col-lg-6 col-xl-6 mt-5 add-cart-item">
+        <img src="{{path}}/www/img/products/{{product.image}}" class="img-fluid" width=100%>
+    </div>
+    <div class="col-md-6 col-lg-6 col-xl-6 mt-5 add-cart-item">
+        <div class="ml-5">
+            <h2 class="mt-5 title-text">{{ product.name }}</h2>
+            <h5 class="text-muted">${{ product.price / 100 }}</h5>
+            <h5 class="pt-3">Select Quantity: ({{ product.quantity }} Limit)</h5>
+            <form action="{{path}}/cart.php" method="post">
+                <div class="row">
+                    <input type="input" name="id" value="{{ product.id }}" hidden>
+                    <div class="col-md-4 col-lg-6">
+                        <select name="amount" class="form-control" required {{ not product.quantity ? 'disabled' : '' }}>
+                            {% for i in range(1, product.quantity) %}
+                                <option>{{ i }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-md-4 col-lg-6">
+                        <input type="submit" value="Add to Cart" class="btn btn-success" required {{ not product.quantity ? 'disabled' : '' }}>
+                    </div>
+                </div>
+            </form>
+            <div class="pt-5">
+                <h7 class="text-muted">{{product.description}}</h7>
+            </div>
+        </div>
+    </div>
+</div>

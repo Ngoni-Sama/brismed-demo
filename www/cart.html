@@ -1,0 +1,88 @@
+{% include "require/head.html" %}
+
+<!-- Cart Menu -->
+<h2 id="your-cart" class="text-center">Your cart</h2>
+<div class="container pt-5">
+    <div class="container-fluid">
+    <table class="table table-borderless">
+        <thead>
+            <tr class="d-flex">
+                <th class="col-6 cart-text">Product</th>
+                <th class="col-2 cart-text">Price</th>
+                <th class="col-2 cart-text">Quantity</th>
+                <th class="col-2 cart-text">Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in cart %}
+                <tr class="d-flex">
+                    <th class="col-2 cart-text"><img src="{{path}}/www/img/products/{{item.image}}" class="img-fluid neg-margin"</th>
+                    <th class="col-4 pl-5">
+                        <h5 class="cart-text">{{ item.name }}</h5>
+                        <br>
+                        <h5 class="cart-text truncate"><i>{{ item.description }}</i></h5>
+                        <form action="{{path}}/cart.php" method="post">
+                            <button type="submit" name="delete" value="{{ item.id }}" class="btn btn-secondary mt-2">Remove</button>
+                        </form>
+                    </th>
+                    <th class="col-2 cart-text">${{ item.price / 100 }}</th>
+                    <th class="col-2 cart-text">{{ item.quantity }}</th>
+                    <th class="col-2 cart-text">${{ (item.price / 100 * item.quantity)|round(2) }}</th>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% if total == 0 %}
+        <h4 class="text-center text-muted">Your cart is empty!</h4>
+    {% endif %}
+    <hr class="pt-3">
+        <div class="row">
+            <div class="col">
+                <h5 class="cart-text text-right"><b>Total<b></h5>
+            </div>
+            <div class="col"><h5 class="cart-text text-right">${{ total }}</h5></div>
+        </div>
+    <br>
+    <form action="{{path}}/secure/checkout.php" method="post" id="checkout">
+        <h4 class="mt-3">Contact Information</h4>
+        <div class="row mt-4">
+            <div class="col">
+                <input type="email" name="email" placeholder="Email" maxlength="30" class="form-control" required>
+            </div>
+        </div>
+        <h4 class="mt-4">Billing Address</h4>
+        <div class="row">
+            <div class="col-lg-6 col-sm-12 mt-4">
+                <input type="text" name="first" placeholder="First Name" maxlength="20" class="form-control" required>
+            </div>
+            <div class="col-lg-6 col-sm-12 mt-4">
+                <input type="text" name="last" placeholder="Last Name" maxlength="20" class="form-control" required>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col">
+                <input type="tel" name="phone" maxlength="10" placeholder="Phone Number" class="form-control" id="phone" required>
+            </div>
+        </div>
+        <div class="float-right mt-4">
+            <a href="{{path}}/index.php" class="btn btn-secondary mr-4">CONTINUE SHOPPING</a>
+            <button type="submit" class="btn btn-info" {{ not total ? 'disabled' : ''}}>CHECKOUT</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    function phonen() {
+        var phone = $('#phone').val(),
+        intRegex = /[0-9 -()+]+$/;
+        if ((phone.length < 6) || (!intRegex.test(phone))) {
+            alert('Please enter a valid phone number.');
+            return false;
+        } else return true;
+    }
+
+    $( "#checkout" ).submit(function( event ) {
+        if (!phonen($("#phone").val()))
+            event.preventDefault();
+    });
+</script>

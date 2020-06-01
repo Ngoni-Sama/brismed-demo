@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,700');
+/*---Media Queries --*/
+@media (max-width: 576px) {
+    html {
+        font-size: 1rem;
+    }
+}
+html {
+    padding-bottom: 20px;
+}
+.title-text{
+    font-size: 3em;
+    margin-bottom: 20px;
+}
+.p-3:hover{
+    transition-duration: 0.5s;
+    background-color: rgba(0,0,0,.2);
+}
+.img-fluid{
+    min-width: 100px;
+    min-height: 100px;
+}
+.black-font{
+    color: #111111;
+}
+.black-font:hover {
+    text-decoration: none;
+    color: black;
+}
+.add-cart-item{
+    margin-left: -3%;
+}
+.product-image {
+    margin-bottom: 10px;
+    object-fit: cover;
+    height: 225px;
+    width: 225px;
+    margin-left: 11px;
+}
+#your-cart{
+    color: #333333;
+    font-size: 2em;
+    padding-top: 45px;
+}
+.cart-text{
+    color: #333333;
+    font-size: 1em;
+    font-weight: 300;
+}
+.neg-margin{
+    margin-left: -8.5%;
+}
+.truncate {
+    width: 250px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.mini-title-text {
+    font-size: 2em;
+    font-weight: 350;
+}
+.payment-container{
+    margin-top: 6%;
+    margin-bottom: 6%;
+    margin-left: 18%;
+    margin-right: 18%;
+}
+.small-weight{
+    font-weight: 300;
+}
+#payment-successful{
+    color: #2ECC40;
+}
